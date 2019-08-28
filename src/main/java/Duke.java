@@ -31,22 +31,36 @@ public class Duke {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
             } else if (tokens[0].equals("deadline")) {
-                String[] token = command.substring(9).split(" /by ");
-                tasks[numOfTasks] = new Deadline(token[0],token[1]);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[numOfTasks].toString());
-                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                try {
+                    String[] token = command.substring(9).split(" /by ");
+                    tasks[numOfTasks] = new Deadline(token[0], token[1]);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[numOfTasks].toString());
+                    System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                } catch (Exception e) {
+                    System.out.println(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
             } else if (tokens[0].equals("event")) {
-                String[] token = command.substring(6).split(" /at ");
-                tasks[numOfTasks] = new Event(token[0],token[1]);
-                System.out.println("Got it. I've added this task:");
-                System.out.println(tasks[numOfTasks].toString());
-                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                try {
+                    String[] token = command.substring(6).split(" /at ");
+                    tasks[numOfTasks] = new Event(token[0], token[1]);
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[numOfTasks].toString());
+                    System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                } catch (Exception e) {
+                    System.out.println(" ☹ OOPS!!! The description of an event cannot be empty.");
+                }
             } else if (tokens[0].equals("todo")){
-                tasks[numOfTasks] = new Todo(command.substring(5));
-                System.out.println("Got it. I've added this task:");
-                System.out.println( tasks[numOfTasks].toString());
-                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                if (command.length() > 5) {
+                    tasks[numOfTasks] = new Todo(command.substring(5));
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(tasks[numOfTasks].toString());
+                    System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+                } else {
+                    System.out.println(" ☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+            } else {
+                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }
