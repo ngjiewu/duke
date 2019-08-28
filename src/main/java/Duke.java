@@ -11,30 +11,42 @@ public class Duke {
         System.out.println("What can I do for you?");
 
         Task[] tasks = new Task[100];
-        int counter = 0;
-
         while (true) {
             Scanner in = new Scanner(System.in);
             String command = in.nextLine();
-            String[] token = command.split(" ");
+            String[] tokens = command.split(" ");
+            int numOfTasks = Task.getTaskCounter();
 
-            if (token[0].equals("list")) {
+            if (command.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
-                for (int i = 0; i < counter; i++) {
+                for (int i = 0; i < numOfTasks; i++) {
                     System.out.println(i+1 + "." + tasks[i].toString());
                 }
-            } else if (token[0].equals("done")) {
-                int getIndex = Integer.parseInt(token[1]) - 1;
+            } else if (tokens[0].equals("done")) {
+                int getIndex = Integer.parseInt(tokens[1]) - 1;
                 tasks[getIndex].markAsDone();
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println(tasks[getIndex].toString());
-            } else if (token[0].equals("bye")) {
+            } else if (tokens[0].equals("bye")) {
                 System.out.println("Bye. Hope to see you again soon!");
                 break;
-            } else {
-                tasks[counter] = new Task(command);
-                System.out.println("added: " + command);
-                counter++;
+            } else if (tokens[0].equals("deadline")) {
+                String[] token = command.substring(9).split(" /by ");
+                tasks[numOfTasks] = new Deadline(token[0],token[1]);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[numOfTasks].toString());
+                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+            } else if (tokens[0].equals("event")) {
+                String[] token = command.substring(6).split(" /at ");
+                tasks[numOfTasks] = new Event(token[0],token[1]);
+                System.out.println("Got it. I've added this task:");
+                System.out.println(tasks[numOfTasks].toString());
+                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
+            } else if (tokens[0].equals("todo")){
+                tasks[numOfTasks] = new Todo(command.substring(5));
+                System.out.println("Got it. I've added this task:");
+                System.out.println( tasks[numOfTasks].toString());
+                System.out.println("Now you have " + Task.getTaskCounter() + " tasks in the list.");
             }
         }
     }
