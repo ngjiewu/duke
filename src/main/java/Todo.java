@@ -3,7 +3,13 @@ public class Todo extends Task {
         super(description);
     }
 
+    @Override
     public String toString() {
         return "[T]" + super.toString();
+    }
+
+    @Override
+    public String writeLine() {
+        return "T | " + (isDone ? "1" : "0") + " | " + description;
     }
 }
