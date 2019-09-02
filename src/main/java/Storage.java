@@ -1,14 +1,18 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.io.*;
 
-public class HandleFile {
+public class Storage {
     private static final String filePath = ".\\data\\duke.txt";
 
-    public static void openFile(ArrayList<Task> tasks) throws DukeException {
+    public static void loadFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileReader file = new FileReader(filePath);
             BufferedReader br = new BufferedReader(file);
             String line;
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(" \\| ");
                 switch(tokens[0]) {
@@ -19,13 +23,15 @@ public class HandleFile {
                         break;
 
                     case "D":
-                        Task deadline = new Deadline(tokens[2],tokens[3]);
+                        LocalDateTime dDateTime = LocalDateTime.parse(tokens[3], formatter);
+                        Task deadline = new Deadline(tokens[2], dDateTime);
                         if (tokens[1].equals("1")) deadline.markAsDone();
                         tasks.add(deadline);
                         break;
 
                     case "E":
-                        Task event = new Event(tokens[2],tokens[3]);
+                        LocalDateTime eDateTime = LocalDateTime.parse(tokens[3], formatter);
+                        Task event = new Event(tokens[2], eDateTime);
                         if (tokens[1].equals("1")) event.markAsDone();
                         tasks.add(event);
                         break;
@@ -38,7 +44,7 @@ public class HandleFile {
         }
     }
 
-    public static void updateFile(ArrayList<Task> tasks) throws DukeException {
+    public static void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);

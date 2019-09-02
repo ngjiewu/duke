@@ -1,3 +1,5 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,8 +13,8 @@ public class Duke {
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you?");
 
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        HandleFile.openFile(tasks);
+        ArrayList<Task> tasks = new ArrayList<>();
+        Storage.loadFile(tasks);
 
         Scanner input = new Scanner(System.in);
         String command = input.nextLine();
@@ -42,7 +44,9 @@ public class Duke {
                 case "deadline":
                     try {
                         String[] token = command.substring(9).split(" /by ");
-                        tasks.add(new Deadline(token[0], token[1]));
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(token[1], formatter);
+                        tasks.add(new Deadline(token[0], dateTime));
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(numOfTasks).toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -54,7 +58,9 @@ public class Duke {
                 case "event":
                     try {
                         String[] token = command.substring(6).split(" /at ");
-                        tasks.add(new Event(token[0], token[1]));
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                        LocalDateTime dateTime = LocalDateTime.parse(token[1], formatter);
+                        tasks.add(new Event(token[0], dateTime));
                         System.out.println("Got it. I've added this task:");
                         System.out.println(tasks.get(numOfTasks).toString());
                         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
@@ -94,7 +100,7 @@ public class Duke {
             }
             command = input.nextLine();
         }
-        HandleFile.updateFile(tasks);
+        Storage.saveFile(tasks);
         System.out.println("Bye. Hope to see you again soon!");
     }
 }
