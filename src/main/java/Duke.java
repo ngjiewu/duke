@@ -94,6 +94,28 @@ public class Duke {
                     }
                     break;
 
+                case "find":
+                    try {
+                        String keyword = command.substring(5);
+                        if (keyword.isBlank()) {
+                            System.out.println("☹ OOPS!!! You cannot find something empty!");
+                        } else {
+                            ArrayList<String> matchList = new ArrayList<>();
+                            for (Task task : tasks) {
+                                if (task.toString().contains(keyword)) {
+                                    matchList.add(task.toString());
+                                }
+                            }
+                            System.out.println("Here are the matching tasks in your list:");
+                            for (int i = 0; i < matchList.size(); i++) {
+                                System.out.println(i + 1 + matchList.get(i));
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("☹ OOPS!!! You cannot find something empty!");
+                    }
+                    break;
+
                 default:
                     System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
                     break;
