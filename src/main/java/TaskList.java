@@ -11,21 +11,16 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public Task get(int index) {
+        return this.tasks.get(index);
+    }
+
     public void add(Task task) {
         this.tasks.add(task);
     }
 
-    public ArrayList<Task> getTask() {
-        return this.tasks;
-    }
-
     public int size() {
         return this.tasks.size();
-    }
-
-    public void markAsDone(int index) {
-        Task task = tasks.get(index);
-        task.markAsDone();
     }
 
     public String toString(int index) {
@@ -34,5 +29,15 @@ public class TaskList {
 
     public void delete(int index) {
         this.tasks.remove(index);
+    }
+
+    public ArrayList<String> findKeyword(String keyword) {
+        ArrayList<String> matchList = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).toString().contains(keyword)) {
+                matchList.add(tasks.get(i).toString());
+            }
+        }
+        return matchList;
     }
 }

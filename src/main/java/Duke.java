@@ -29,7 +29,7 @@ public class Duke {
             command = input.nextLine();
         }
         try {
-            storage.saveFile(tasks.getTask());
+            storage.saveFile(tasks);
         } catch (DukeException e) {
             e.printStackTrace();
         }

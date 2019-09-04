@@ -49,18 +49,18 @@ public class Storage {
         }
     }
 
-    public void saveFile(ArrayList<Task> tasks) throws DukeException {
+    public void saveFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (Task task : tasks) {
-                bw.write(task.writeLine());
+            for (int i = 0; i < tasks.size(); i++) {
+                bw.write(tasks.get(i).writeLine());
                 bw.newLine();
             }
             bw.close();
         } catch (IOException e) {
-            throw new DukeException("File is not found!");
+            throw new DukeException("Error encountered when saving file.");
         }
     }
 }
