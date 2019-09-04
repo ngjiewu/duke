@@ -1,12 +1,17 @@
+import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
 
 public class Storage {
-    private static final String filePath = ".\\data\\duke.txt";
+    private String filePath;
 
-    public static void loadFile(ArrayList<Task> tasks) throws DukeException {
+    public Storage(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public ArrayList<Task> load() throws DukeException {
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             FileReader file = new FileReader(filePath);
             BufferedReader br = new BufferedReader(file);
@@ -36,15 +41,15 @@ public class Storage {
                         tasks.add(event);
                         break;
                 }
+
             }
-        } catch (FileNotFoundException e) {
-            throw new DukeException("Duke.txt file not found!");
-        } catch (IOException e) {
-            e.printStackTrace();
+            return tasks;
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
         }
     }
 
-    public static void saveFile(ArrayList<Task> tasks) throws DukeException {
+    public void saveFile(ArrayList<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);
             BufferedWriter bw = new BufferedWriter(fw);

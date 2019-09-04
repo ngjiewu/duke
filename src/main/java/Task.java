@@ -8,8 +8,9 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✗");
+        return (isDone ? "+" : "-");
     }
+
     public void markAsDone() {
         this.isDone = true;
     }
