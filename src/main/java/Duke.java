@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * The Duke class is the main class of the entire programme
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -9,6 +12,10 @@ public class Duke {
         new Duke("C:\\Users\\JieWu\\Desktop\\duke\\data\\duke.txt").run();
     }
 
+    /**
+     * Loads the essential components of the entire programme
+     * @param filePath name of the location in the file system
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -20,6 +27,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Main function of the entire programme that controls how the whole programme will be run
+     */
     public void run () {
         ui.showWelcome();
         Scanner input = new Scanner(System.in);

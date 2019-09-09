@@ -3,13 +3,25 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs filePath with the specified filepath
+     * @param filePath name of the location in the file system
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Loads previous tasks data from text file
+     * @return A Task ArrayList containing the data from the specified text file
+     * @throws DukeException If the specified text file is not found
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -49,6 +61,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks data to a text file
+     * @param tasks TaskList to obtain the tasks data from
+     * @throws DukeException If an error is countered while trying to save the data to the file
+     */
     public void saveFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(filePath);

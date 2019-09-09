@@ -1,9 +1,18 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * The Parser class deals with making sense of the user command
+ */
 public class Parser {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
+    /**
+     * Calling out of the relevant functions according to the user's command
+     * @param command String representation of the user's input
+     * @param ui Ui class type to be called and executed
+     * @param tasks TaskList class type that contains the list of data
+     */
     public static void execute(String command, Ui ui, TaskList tasks) {
         String[] tokens = command.split(" ");
         switch (tokens[0]) {
