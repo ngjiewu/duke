@@ -1,8 +1,5 @@
 deadline homework /by 2019-08-31 23:59
-event meeting /at 2019-08-08 10:00
-done 6
 done 5
 list
-delete 5
 delete 5
 bye
