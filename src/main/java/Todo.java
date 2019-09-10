@@ -1,9 +1,9 @@
 /**
- * The Todo class is an extension of the base class Task
+ * The Todo class is an extension of the base class Task.
  */
 public class Todo extends Task {
     /**
-     * Constructor for class Todo
+     * Constructor for class Todo.
      * @param description string of the Todo's description
      */
     public Todo(String description) {
@@ -11,7 +11,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string representation of a Todo
+     * Returns a string representation of a Todo.
      * @return String representation of a Todo with appropriate icon and description
      */
     @Override
@@ -20,7 +20,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Returns a string representation of how a Todo is saved in text file
+     * Returns a string representation of how a Todo is saved in text file.
      * @return String representation of a Todo in text file
      */
     @Override

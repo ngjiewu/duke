@@ -1,13 +1,13 @@
 import java.time.LocalDateTime;
 
 /**
- * The Deadline class is an extension of the base class Task
+ * The Deadline class is an extension of the base class Task.
  */
 public class Deadline extends Task {
     protected LocalDateTime by;
 
     /**
-     * Constructor for class Deadline
+     * Constructor for class Deadline.
      * @param description string of the Deadline's description
      * @param by LocalDateTime that represents date-time of the Deadline
      */
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Outputs the date-time as a string in the format (yyyy-MM-dd HH:mm)
+     * Outputs the date-time as a string in the format (yyyy-MM-dd HH:mm).
      * @param by LocalDateTime that represents date-time of the Deadline
      * @return String representation of date and time of the Deadline
      */
@@ -26,7 +26,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of a Deadline
+     * Returns a string representation of a Deadline.
      * @return String representation of a Deadline with appropriate icon and description
      */
     @Override
@@ -35,7 +35,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string representation of how a Deadline is saved in text file
+     * Returns a string representation of how a Deadline is saved in text file.
      * @return String representation of a deadline in text file
      */
     @Override

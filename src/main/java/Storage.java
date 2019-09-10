@@ -1,16 +1,20 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     private String filePath;
 
     /**
-     * Constructs filePath with the specified filepath
+     * Constructs filePath with the specified filepath.
      * @param filePath name of the location in the file system
      */
     public Storage(String filePath) {
@@ -18,7 +22,7 @@ public class Storage {
     }
 
     /**
-     * Loads previous tasks data from text file
+     * Loads previous tasks data from text file.
      * @return A Task ArrayList containing the data from the specified text file
      * @throws DukeException If the specified text file is not found
      */
@@ -32,26 +36,35 @@ public class Storage {
 
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(" \\| ");
-                switch(tokens[0]) {
-                    case "T":
-                        Task todo = new Todo(tokens[2]);
-                        if (tokens[1].equals("1")) todo.markAsDone();
-                        tasks.add(todo);
-                        break;
+                switch (tokens[0]) {
+                case "T":
+                    Task todo = new Todo(tokens[2]);
+                    if (tokens[1].equals("1")) {
+                        todo.markAsDone();
+                    }
+                    tasks.add(todo);
+                    break;
 
-                    case "D":
-                        LocalDateTime dDateTime = LocalDateTime.parse(tokens[3], formatter);
-                        Task deadline = new Deadline(tokens[2], dDateTime);
-                        if (tokens[1].equals("1")) deadline.markAsDone();
-                        tasks.add(deadline);
-                        break;
+                case "D":
+                    LocalDateTime deadlineDateTime = LocalDateTime.parse(tokens[3], formatter);
+                    Task deadline = new Deadline(tokens[2], deadlineDateTime);
+                    if (tokens[1].equals("1")) {
+                        deadline.markAsDone();
+                    }
+                    tasks.add(deadline);
+                    break;
 
-                    case "E":
-                        LocalDateTime eDateTime = LocalDateTime.parse(tokens[3], formatter);
-                        Task event = new Event(tokens[2], eDateTime);
-                        if (tokens[1].equals("1")) event.markAsDone();
-                        tasks.add(event);
-                        break;
+                case "E":
+                    LocalDateTime eventDateTime = LocalDateTime.parse(tokens[3], formatter);
+                    Task event = new Event(tokens[2], eventDateTime);
+                    if (tokens[1].equals("1")) {
+                        event.markAsDone();
+                    }
+                    tasks.add(event);
+                    break;
+
+                default:
+                    System.out.println("Error reading line in text file.");
                 }
 
             }
@@ -62,7 +75,7 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks data to a text file
+     * Saves the tasks data to a text file.
      * @param tasks TaskList to obtain the tasks data from
      * @throws DukeException If an error is countered while trying to save the data to the file
      */
